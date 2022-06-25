@@ -41,9 +41,32 @@ const resolvers = {
 
             const token = signToken(user);
             return { token, user };
+        },
+
+        saveBook: async function (parent, { book }, context) {
+            if (context.user) {
+                const updateUserBook = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { saveBooks: book } },
+                    { new: true }
+                )
+                return updateUserBook;
+            }
+            throw new AuthenticationError("You need to login first!");
+        },
+
+        removeBook: async function (parent, { bookId }, context) {
+            if (context.user) {
+                const updateUserBook = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { savedBooks: { bookId: bookId } } },
+                    { new: true }
+                )
+                return updateUserBook;
+            }
+            throw new AuthenticationError("You need to login first!");
         }
     }
-
 };
 
 module.exports = resolvers;
