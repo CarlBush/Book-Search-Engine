@@ -43,13 +43,14 @@ const resolvers = {
             return { token, user };
         },
 
-        saveBook: async function (parent, { book }, context) {
+        saveBook: async function (parent, { input }, context) {
             if (context.user) {
                 const updateUserBook = await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $addToSet: { saveBooks: book } },
+                    { $addToSet: { savedBooks: input } },
                     { new: true }
                 )
+                console.log(updateUserBook);
                 return updateUserBook;
             }
             throw new AuthenticationError("You need to login first!");
