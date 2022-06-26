@@ -44,17 +44,9 @@ const SavedBooks = () => {
     }
   };
 
-  //   const updatedUser = await response.json();
-  //   setUserData(updatedUser);
-  //   // upon success, remove book's id from localStorage
-  //   removeBookId(bookId);
-  // } catch (err) {
-  //   console.error(err);
-  // }
-
   // if data isn't here yet, say so
   if (loading) {
-    return <h2>LOADING...(NOTHING SAVED YET)</h2>;
+    return <h2>LOADING...</h2>;
   }
 
   return (
