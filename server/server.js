@@ -23,9 +23,6 @@ app.use(express.json());
 
 // if we're in production, serve client/build as static assets
 
-
-const startApolloServer = async (typeDefs, resolvers) => {
-  await server.start();
   server.applyMiddleware({ app });
 
   //app.use(routes);
@@ -45,6 +42,3 @@ const startApolloServer = async (typeDefs, resolvers) => {
       console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
     });
   });
-};
-
-startApolloServer(typeDefs, resolvers);
